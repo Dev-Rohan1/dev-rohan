@@ -1,8 +1,14 @@
-// src/Footer.js
-import React from "react";
+import React, { useState } from "react";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const [activeLink, setActiveLink] = useState("");
+
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+  };
+
   return (
     <footer className="bg-gray-900 text-white py-12 px-4 sm:px-8 lg:px-16 rounded-tl-lg rounded-tr-lg">
       <div className="container mx-auto px-4">
@@ -11,43 +17,27 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li>
-                <a href="/" className="hover:text-purple-400 transition-colors">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/about"
-                  className="hover:text-purple-400 transition-colors"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/services"
-                  className="hover:text-purple-400 transition-colors"
-                >
-                  Services
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/blog"
-                  className="hover:text-purple-400 transition-colors"
-                >
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/contact"
-                  className="hover:text-purple-400 transition-colors"
-                >
-                  Contact
-                </a>
-              </li>
+              {[
+                { name: "Home", to: "/" },
+                { name: "About", to: "/about" },
+                { name: "Services", to: "/service" },
+                { name: "Blog", to: "/blog" },
+                { name: "Contact", to: "/contact" },
+              ].map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    onClick={() => handleLinkClick(link.to)}
+                    className={`${
+                      activeLink === link.to
+                        ? "text-purple-500"
+                        : "hover:text-purple-400 transition-colors"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -87,20 +77,10 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Contact Info</h3>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="mailto:rohanul.cse@gmail.com"
-                  className="hover:text-purple-400 transition-colors"
-                >
-                  dev.rohan2024@gmail.com
-                </a>
+                <span>dev.rohan2024@gmail.com</span>
               </li>
               <li>
-                <a
-                  href="tel:+8801234567890"
-                  className="hover:text-purple-400 transition-colors"
-                >
-                  +8801707474429 or +8801896486337
-                </a>
+                <span>+8801707474429 or +8801896486337</span>
               </li>
               <li>
                 <p>Boro Hasimpur, Chiribondor, Dinajpur, Bangladesh</p>
