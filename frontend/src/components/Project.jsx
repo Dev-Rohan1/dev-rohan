@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import portflio from "../assets/portflio.png";
 
 // Sample project data with images and links
 const projectsData = [
@@ -71,12 +70,12 @@ const Project = () => {
       <h1 className="text-4xl font-bold text-center mb-3">Project Showcase</h1>
       <span className="block h-1 w-25 bg-blue-600 rounded-full mx-auto mb-8"></span>
       {/* Filter Buttons */}
-      <div className="flex flex-wrap justify-center gap-4 mb-8">
+      <div className="flex flex-wrap justify-center gap-2 mb-8">
         {filters.map((filter) => (
           <button
             key={filter}
             onClick={() => setActiveFilter(filter)}
-            className={`px-4 py-2 rounded-lg font-semibold transition-all duration-300 ${
+            className={`px-4 py-2 rounded-lg font-semibold transition-all duration-300 cursor-pointer ${
               activeFilter === filter
                 ? "bg-blue-600 text-white"
                 : "bg-white text-blue-600 hover:bg-blue-100"
@@ -88,18 +87,20 @@ const Project = () => {
       </div>
 
       {/* Project Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredProjects.map((project) => (
           <div
             key={project.id}
             className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300"
           >
             {/* Project Image */}
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-48 object-cover rounded-lg mb-4"
-            />
+            <div className="aspect-w-16 aspect-h-9">
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover rounded-lg mb-4"
+              />
+            </div>
             <h2 className="text-xl font-bold mb-2">{project.title}</h2>
             <p className="text-gray-600 mb-4">{project.description}</p>
             {/* Tags */}
@@ -114,7 +115,7 @@ const Project = () => {
               ))}
             </div>
             {/* Buttons for Source Code and Live Link */}
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href={project.sourceCode}
                 target="_blank"
